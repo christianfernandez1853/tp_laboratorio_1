@@ -27,7 +27,7 @@
 
 1599770388 c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_calculadora_tp1\interface.h
 
-1599785005 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_calculadora_tp1\mathfunctions.c
+1599785447 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_calculadora_tp1\mathfunctions.c
 	<stdlib.h>
 	<stdio.h>
 	"MathFunctions.h"
@@ -35,7 +35,7 @@
 
 1599707690 c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_calculadora_tp1\mathfunctions.h
 
-1599785170 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_calculadora_tp1\main.c
+1599785909 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_calculadora_tp1\main.c
 	<stdlib.h>
 	<stdio.h>
 	"MathFunctions.h"

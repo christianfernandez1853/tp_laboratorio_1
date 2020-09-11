@@ -2,7 +2,7 @@
 *
 * Programa: Calculadora TP1*
 *
-* Version: 1.3.0 - 10 de septiembre de 2020
+* Version: 1.3.1 - 11 de septiembre de 2020
 * Autor: Christian Fernandez
 *
 *********************************************************************/
@@ -33,6 +33,8 @@ int main()
     firstNumLoaded = 0;
     int secNumLoaded;
     secNumLoaded = 0;
+    int resultsObtained;
+    resultsObtained = 0;
 
     PrintHeader();
 
@@ -71,6 +73,7 @@ int main()
                 resultDiv = BasicOperations(firstNumber, secondNumber, '/');
                 resultFactFirstNum = Factorial(firstNumber);
                 resultFactSecondNum = Factorial(secondNumber);
+                resultsObtained = 1;
                 system("cls");
                 PrintMessage("Resultados Obtenidos");
             }
@@ -81,6 +84,11 @@ int main()
             {
                 system("cls");
                 PrintMessage("Necesitas ingresar los dos operandos primero.");
+            }
+            else if(resultsObtained == 0)
+            {
+                system("cls");
+                PrintMessage("Necesitas calcular las operaciones primero.");
             }
             else
             {
