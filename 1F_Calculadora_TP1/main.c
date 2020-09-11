@@ -2,11 +2,7 @@
 *
 * Programa: Calculadora TP1*
 *
-<<<<<<< HEAD
 * Version: 1.3.0 - 10 de septiembre de 2020
-=======
-* Version: 1.2 del 10 septiembre de 2020
->>>>>>> c4b2bdcfdb4bd9b8dadeb23a7b47399dde3c2157
 * Autor: Christian Fernandez
 *
 *********************************************************************/
