@@ -70,7 +70,7 @@ int UI_ExitAlert(void)
     system("cls");
 
     UI_printDivider();
-    printf("*** Alerta: Esta seguro que desea salir del programa? (S: Si / N: No) ***  \n");
+    printf("ATENCION:\nEsta seguro que desea salir del programa?\n(S: Si / N: No)\n");
     UI_printDivider();
     fflush(stdin);
     scanf("%c", &exitChoice);
@@ -79,7 +79,7 @@ int UI_ExitAlert(void)
     while(exitChoice != 's' && exitChoice != 'S' && exitChoice != 'n' && exitChoice != 'N')
     {
         UI_printDivider();
-        printf("*** Opcion invalida. Ingrese una opcion correcta. (S: Si / N: No) *** \n");
+        printf("Opcion invalida.\nIngrese una opcion correcta.\nEsta seguro que desea salir del programa?\n(S: Si / N: No)");
         UI_printDivider();
         fflush(stdin);
         scanf("%c", &exitChoice);
@@ -91,7 +91,7 @@ int UI_ExitAlert(void)
         system("cls");
 
         UI_printDivider();
-        printf("*** Saliendo del programa... *** \n");
+        printf("Saliendo del programa...\n");
         UI_printDivider();
 
         exitStatus = 1;

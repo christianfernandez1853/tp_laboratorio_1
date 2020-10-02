@@ -131,20 +131,8 @@ int main()
                     scanf("%d", &sortOrder);
                     system("cls");
 
-                    while(sortOrder != 0 && sortOrder != 1)
-                    {
-                        UI_printDivider();
-                        printf("                               LISTADO DE EMPLEADOS: \n");
-                        UI_printDivider();
-                        printf("Seleccione una opcion para obtener el listado ordenado por apellido y sector:\n\n");
-                        printf("[0] - Descendente\n");
-                        printf("[1] - Ascendente\n\n");
-                        UI_printDivider();
-                        printf("Opcion invalida. Ingrese una opcion correcta");
-                        scanf("%d", &sortOrder);
-                    }
-                        array_sortEmployees(arrayEmployee, EMP_SIZE, sortOrder);
-                        array_printEmployees(arrayEmployee, EMP_SIZE);
+                    array_sortEmployees(arrayEmployee, EMP_SIZE, sortOrder);
+                    array_printEmployees(arrayEmployee, EMP_SIZE);
                 }
 
                 break;
@@ -156,7 +144,7 @@ int main()
             default:
                 system("cls");
                 UI_printDivider();
-                printf("Opcion invalida. Ingrese una opcion correcta");
+                printf("ATENCION:\nOpcion invalida.\nIngrese una opcion correcta: ");
         }
 
     } while(exitStatus != 1);

@@ -221,106 +221,131 @@ int array_removeEmployee(sEmployee* arrayName, int arraySize, int id)
 
 //**************************************************************************************************************************************************//
 
-int array_sortEmployees(sEmployee* arrayName, int arraySize, int order)
+/** \brief Ordena el array de empleados por apellido y sector, de forma descendente y ascendente segun el orden solicitado.
+ *
+ * \param  sEmployee* newEmployee                                    Puntero al array de la estructura
+ * \param  int arraySize                                             Solicita el tamaño del array
+ * \param  int order                                                 Solicita el tipo de orden a mostrar
+ * \return                                                           Devuelve: -1 (Puntero NULL o arraySize invalido)
+ *                                                                              0 (Si no hay errores de parametros)
+ */
+
+int array_sortEmployees(sEmployee* arrayEmp, int arraySize, int order)
 {
     int returns = -1;
     int i;
     int j;
-    sEmployee k;
+    sEmployee aux;
 
-    if(arrayName != NULL && arraySize > 0)
+    if(arrayEmp != NULL && arraySize > 0)
     {
-        if(order == 0)
+        if(order == 0) // Descendente
         {
             for(i = 0; i < arraySize - 1; i++)
             {
                 for(j = i + 1 ; j < arraySize; j++)
                 {
-                    if((strcmp(arrayName[i].lastName, arrayName[j].lastName) > 0))
+                    if((strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) < 0))
                     {
-                        strcpy(k.name, arrayName[i].name);
-                        strcpy(arrayName[i].name, arrayName[j].name);
-                        strcpy(arrayName[j].name, k.name);
+                        strcpy(aux.name, arrayEmp[i].name);
+                        strcpy(arrayEmp[i].name, arrayEmp[j].name);
+                        strcpy(arrayEmp[j].name, aux.name);
 
-                        strcpy(k.lastName, arrayName[i].lastName);
-                        strcpy(arrayName[i].lastName, arrayName[j].lastName);
-                        strcpy(arrayName[j].lastName, k.lastName);
+                        strcpy(aux.lastName, arrayEmp[i].lastName);
+                        strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
+                        strcpy(arrayEmp[j].lastName, aux.lastName);
 
-                        k.salary = arrayName[i].salary;
-                        arrayName[i].salary = arrayName[j].salary;
-                        arrayName[j].salary = k.salary;
+                        aux.salary = arrayEmp[i].salary;
+                        arrayEmp[i].salary = arrayEmp[j].salary;
+                        arrayEmp[j].salary = aux.salary;
 
-                        k.id = arrayName[i].sector;
-                        arrayName[i].sector = arrayName[j].sector;
-                        arrayName[j].sector = k.sector;
+                        aux.sector = arrayEmp[i].sector;
+                        arrayEmp[i].sector = arrayEmp[j].sector;
+                        arrayEmp[j].sector = aux.sector;
+
+                        aux.id = arrayEmp[i].id;
+                        arrayEmp[i].id = arrayEmp[j].id;
+                        arrayEmp[j].id = aux.id;
                     }
                     else
                     {
-                        if(strcmp(arrayName[i].lastName, arrayName[j].lastName) == 0 && (arrayName[i].sector > arrayName[j].sector))
+                        if(strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) == 0 && (arrayEmp[i].sector < arrayEmp[j].sector))
                         {
-                            strcpy(k.name, arrayName[i].name);
-                            strcpy(arrayName[i].name, arrayName[j].name);
-                            strcpy(arrayName[j].name, k.name);
+                            strcpy(aux.name, arrayEmp[i].name);
+                            strcpy(arrayEmp[i].name, arrayEmp[j].name);
+                            strcpy(arrayEmp[j].name, aux.name);
 
-                            strcpy(k.lastName, arrayName[i].lastName);
-                            strcpy(arrayName[i].lastName, arrayName[j].lastName);
-                            strcpy(arrayName[j].lastName, k.lastName);
+                            strcpy(aux.lastName, arrayEmp[i].lastName);
+                            strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
+                            strcpy(arrayEmp[j].lastName, aux.lastName);
 
-                            k.salary = arrayName[i].salary;
-                            arrayName[i].salary = arrayName[j].salary;
-                            arrayName[j].salary = k.salary;
+                            aux.salary = arrayEmp[i].salary;
+                            arrayEmp[i].salary = arrayEmp[j].salary;
+                            arrayEmp[j].salary = aux.salary;
 
-                            k.id = arrayName[i].sector;
-                            arrayName[i].sector = arrayName[j].sector;
-                            arrayName[j].sector = k.sector;
+                            aux.sector = arrayEmp[i].sector;
+                            arrayEmp[i].sector = arrayEmp[j].sector;
+                            arrayEmp[j].sector = aux.sector;
+
+                            aux.id = arrayEmp[i].id;
+                            arrayEmp[i].id = arrayEmp[j].id;
+                            arrayEmp[j].id = aux.id;
                         }
                     }
                 }
             }
         }
-        else
+        else // Ascendente
         {
             for(i = 0; i < arraySize - 1; i++)
             {
                 for(j = i + 1 ; j < arraySize; j++)
                 {
-                    if((strcmp(arrayName[i].lastName, arrayName[j].lastName) < 0))
+                    if((strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) > 0))
                     {
-                        strcpy(k.name, arrayName[i].name);
-                        strcpy(arrayName[i].name, arrayName[j].name);
-                        strcpy(arrayName[j].name, k.name);
+                        strcpy(aux.name, arrayEmp[i].name);
+                        strcpy(arrayEmp[i].name, arrayEmp[j].name);
+                        strcpy(arrayEmp[j].name, aux.name);
 
-                        strcpy(k.lastName, arrayName[i].lastName);
-                        strcpy(arrayName[i].lastName, arrayName[j].lastName);
-                        strcpy(arrayName[j].lastName, k.lastName);
+                        strcpy(aux.lastName, arrayEmp[i].lastName);
+                        strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
+                        strcpy(arrayEmp[j].lastName, aux.lastName);
 
-                        k.salary = arrayName[i].salary;
-                        arrayName[i].salary = arrayName[j].salary;
-                        arrayName[j].salary = k.salary;
+                        aux.salary = arrayEmp[i].salary;
+                        arrayEmp[i].salary = arrayEmp[j].salary;
+                        arrayEmp[j].salary = aux.salary;
 
-                        k.id = arrayName[i].sector;
-                        arrayName[i].sector = arrayName[j].sector;
-                        arrayName[j].sector = k.sector;
+                        aux.sector = arrayEmp[i].sector;
+                        arrayEmp[i].sector = arrayEmp[j].sector;
+                        arrayEmp[j].sector = aux.sector;
+
+                        aux.id = arrayEmp[i].id;
+                        arrayEmp[i].id = arrayEmp[j].id;
+                        arrayEmp[j].id = aux.id;
                     }
                     else
                     {
-                        if(strcmp(arrayName[i].lastName, arrayName[j].lastName) == 0 && (arrayName[i].sector > arrayName[j].sector))
+                        if(strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) == 0 && (arrayEmp[i].sector > arrayEmp[j].sector))
                         {
-                            strcpy(k.name, arrayName[i].name);
-                            strcpy(arrayName[i].name, arrayName[j].name);
-                            strcpy(arrayName[j].name, k.name);
+                            strcpy(aux.name, arrayEmp[i].name);
+                            strcpy(arrayEmp[i].name, arrayEmp[j].name);
+                            strcpy(arrayEmp[j].name, aux.name);
 
-                            strcpy(k.lastName, arrayName[i].lastName);
-                            strcpy(arrayName[i].lastName, arrayName[j].lastName);
-                            strcpy(arrayName[j].lastName, k.lastName);
+                            strcpy(aux.lastName, arrayEmp[i].lastName);
+                            strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
+                            strcpy(arrayEmp[j].lastName, aux.lastName);
 
-                            k.salary = arrayName[i].salary;
-                            arrayName[i].salary = arrayName[j].salary;
-                            arrayName[j].salary = k.salary;
+                            aux.salary = arrayEmp[i].salary;
+                            arrayEmp[i].salary = arrayEmp[j].salary;
+                            arrayEmp[j].salary = aux.salary;
 
-                            k.id = arrayName[i].sector;
-                            arrayName[i].sector = arrayName[j].sector;
-                            arrayName[j].sector = k.sector;
+                            aux.sector = arrayEmp[i].sector;
+                            arrayEmp[i].sector = arrayEmp[j].sector;
+                            arrayEmp[j].sector = aux.sector;
+
+                            aux.id = arrayEmp[i].id;
+                            arrayEmp[i].id = arrayEmp[j].id;
+                            arrayEmp[j].id = aux.id;
                         }
                     }
                 }
