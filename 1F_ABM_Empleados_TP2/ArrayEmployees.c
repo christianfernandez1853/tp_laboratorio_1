@@ -52,9 +52,9 @@ int array_getFreePlaceInArray(sEmployee* arrayName, int arraySize)
     {
         for(i = 0; i < arraySize; i++)
         {
-            if(arrayName[i].isEmpty != 0)
+            if(arrayName[i].isEmpty != 0) // Si la posicion no esta llena
             {
-                freeIndex = i;
+                freeIndex = i; // Encuentro lugar vacio
                 break; // Termina el loop cuando encuentra un lugar vacio
             }
         }
@@ -95,6 +95,7 @@ int array_loadArrayField(sEmployee* newEmployee, int arraySize, int newId)
         data_upperStringInitials(newEmployee[newId - 1].lastName);
         data_getValidatedFloat(&newEmployee[newId - 1].salary, "Ingrese Sueldo: ", minSalary, maxSalary);
         data_getValidatedInt(&newEmployee[newId - 1].sector, "Ingrese Sector: ", minSector, maxSector);
+        newEmployee[newId - 1].id = newId;
         newEmployee[newId - 1].isEmpty = 0;
 
         returns = 0;
@@ -135,7 +136,6 @@ void array_showNewEmployeeLoaded(sEmployee* arrayName, int newId)
 int array_ShowAllEmployes(sEmployee* arrayName, int arraySize)
 {
     int returns = -1;
-
     int i;
 
     if(arrayName != NULL && arraySize > 0)
@@ -145,9 +145,11 @@ int array_ShowAllEmployes(sEmployee* arrayName, int arraySize)
 
         for(i = 0; i < arraySize; i++)
         {
-
-            printf("\n#%-4d %-21s %-21s $%-15.2f %-2d\n",
-                    arrayName[i].id, arrayName[i].name, arrayName[i].lastName, arrayName[i].salary, arrayName[i].sector);
+            if(arrayName[i].isEmpty == 0)
+            {
+                printf("\n#%-4d %-21s %-21s $%-15.2f %-2d\n",
+                arrayName[i].id, arrayName[i].name, arrayName[i].lastName, arrayName[i].salary, arrayName[i].sector);
+            }
 
             returns = 0;
         }

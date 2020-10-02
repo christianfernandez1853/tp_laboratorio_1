@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-#include "DataLab.h"
 #include "InterfaceLab.h"
 #include "ArrayEmployees.h"
 
@@ -37,10 +36,10 @@ int main()
         {
             case 1: //*** ALTA EMPLEADOS ***//
                 system("cls");
-                freeIndex = array_getFreePlaceInArray(arrayEmployee, EMP_SIZE);
-                printf("freeIndex is: %d", freeIndex); // BORRAR LUEGO
 
-                if(freeIndex == -1 || freeIndex == EMP_SIZE)
+                freeIndex = array_getFreePlaceInArray(arrayEmployee, EMP_SIZE);
+
+                if(freeIndex == -1)
                 {
                     UI_printDivider();
                     printf("ATENCION:\nLa base de datos de empleados se encuentra llena %d empleados cargados.\nElimine un empleado para poder ingresar uno nuevo. \n", EMP_SIZE);
@@ -52,13 +51,12 @@ int main()
                     array_loadArrayField(arrayEmployee, EMP_SIZE, newId);
                     array_showNewEmployeeLoaded(arrayEmployee, newId);
                 }
-
                 break;
 
             case 2: //*** MODIFICACION EMPLEADOS ***//
                 system("cls");
 
-                if(freeIndex != -0)
+                if(freeIndex == 0)
                 {
                     UI_printDivider();
                     printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
@@ -73,11 +71,22 @@ int main()
             case 3: //*** BAJA EMPLEADOS ***//
                 system("cls");
 
+                if(freeIndex == 0)
+                {
+                    UI_printDivider();
+                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
+                }
+                else
+                {
+                    // modify employee
+                }
+
                 break;
+
             case 4: //*** MOSTRAR EMPLEADOS ***//
                 system("cls");
 
-                if(freeIndex != -0)
+                if(freeIndex == 0)
                 {
                     UI_printDivider();
                     printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
@@ -100,7 +109,6 @@ int main()
         }
 
     } while(exitStatus != 1);
-
 
     return 0;
 }
