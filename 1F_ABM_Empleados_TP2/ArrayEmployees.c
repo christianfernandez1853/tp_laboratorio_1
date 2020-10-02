@@ -4,10 +4,6 @@
 #include "InterfaceLab.h"
 #include "ArrayEmployees.h"
 
-#define EMPTY 1
-#define FULL 0
-
-
 
 /** \brief Inicializa la estructura indicando que todos los campos de la misma estan vacios.
  *
@@ -22,11 +18,11 @@ int array_initEmployees(sEmployee* arrayName, int arraySize)
     int returns = -1;
     int i;
 
-    if(arrayName != NULL && arraySize >= 1)
+    if(arrayName != NULL && arraySize > 0)
     {
         for(i = 0; i < arraySize; i++)
         {
-            arrayName[i].isEmpty = EMPTY;
+            arrayName[i].isEmpty = 1;
         }
 
         returns = 0;
@@ -50,79 +46,69 @@ int array_initEmployees(sEmployee* arrayName, int arraySize)
 int array_getFreePlaceInArray(sEmployee* arrayName, int arraySize)
 {
     int i;
+    int freeIndex;
 
-    if(arrayName != NULL && arraySize >= 1)
+    if(arrayName != NULL && arraySize > 0)
     {
         for(i = 0; i < arraySize; i++)
         {
-            if(arrayName[i].isEmpty != FULL || i != arraySize)
+            if(arrayName[i].isEmpty != 0)
             {
+                freeIndex = i;
                 break; // Termina el loop cuando encuentra un lugar vacio
             }
+        }
 
-            if(i == arraySize) // Si i llego a la ultima posicion del array, entonces no hay lugar vacio
-            {
-                i = -1;
-            }
+        if(i == arraySize) // Si i llego a la ultima posicion del array, entonces no hay lugar vacio
+        {
+            freeIndex = -1;
         }
     }
 
-    return i;
+    return freeIndex;
 }
 //**************************************************************************************************************************************************//
 
-/** \brief
+/** \brief Solicita al usuario llenar los campos de datos del array y devuelve los mismos.
  *
- * \param
- * \param
- * \return
- *
- */
-
- int array_newID(sEmployee* newEmployee, int arraySize, int previousID)
- {
-     int newID;
-
-     newID = previousID + 1;
-
-     return newID;
- }
-
-//**************************************************************************************************************************************************//
-
-/** \brief Solicita al usuario llenar los campos de datos de la estructura y devuelve los mismos.
- *
- * \return sEmployee newEmployee                                    Devuelve el campo de la estructura ya cargado
+ * \return sEmployee* newEmployee                                   Puntero al array de la estructura
  *
  */
 
 int array_loadArrayField(sEmployee* newEmployee, int arraySize, int newId)
 {
-    float minSalary = 16875.00; // Sueldo min de ejemplo (minimo en ARG)
-    float maxSalary = 1000000.00; // Sueldo max de ejemplo
+    float minSalary = 1.00;
+    float maxSalary = 1000000.00;
     int minSector = 1;
     int maxSector = 5;
+    int returns = -1;
 
-    UI_printDivider();
-    printf("                                 NUEVO EMPLEADO: \n\n");
-    printf("                                    ID - #%d", newId);
+    if(newEmployee != NULL && arraySize > 0)
+    {
+        UI_printDivider();
+        printf("                                 NUEVO EMPLEADO: \n\n");
+        printf("                                    ID - #%d", newId);
 
-    data_getValidatedAlphaString(newEmployee[newId].name, "Ingrese Nombre: ", arraySize);
-    data_upperStringInitials(newEmployee[newId].name);
-    data_getValidatedAlphaString(newEmployee[newId].lastName, "Ingrese Apellido: ", arraySize);
-    data_upperStringInitials(newEmployee[newId].lastName);
-    data_getValidatedFloat(&newEmployee[newId].salary, "Ingrese Sueldo: ", minSalary, maxSalary);
-    data_getValidatedInt(&newEmployee[newId].sector, "Ingrese Sector: ", minSector, maxSector);
-    newEmployee[newId - 1].isEmpty = 0;
+        data_getValidatedAlphaString(newEmployee[newId - 1].name, "Ingrese Nombre: ", arraySize);
+        data_upperStringInitials(newEmployee[newId - 1].name);
+        data_getValidatedAlphaString(newEmployee[newId - 1].lastName, "Ingrese Apellido: ", arraySize);
+        data_upperStringInitials(newEmployee[newId - 1].lastName);
+        data_getValidatedFloat(&newEmployee[newId - 1].salary, "Ingrese Sueldo: ", minSalary, maxSalary);
+        data_getValidatedInt(&newEmployee[newId - 1].sector, "Ingrese Sector: ", minSector, maxSector);
+        newEmployee[newId - 1].isEmpty = 0;
 
-    return 0;
+        returns = 0;
+    }
+
+    return returns;
 }
 
 //**************************************************************************************************************************************************//
 
-/** \brief Muestra un campo especifico del array ya cargado
+/** \brief Muestra el ultimo empleado cargado.
  *
- * \param sEmployee arrayName                                      Solicita el campo del array a mostrar
+ * \param sEmployee* arrayName                                      Puntero al array de la estructura
+ * \param int newId                                                 Solicita el ID a mostrar
  *
  */
 
@@ -134,34 +120,40 @@ void array_showNewEmployeeLoaded(sEmployee* arrayName, int newId)
     UI_printDivider();
     printf("\n %-4s %-21s %-21s %-15s %-2s\n", "ID", "Nombre", "Apellido", "Sueldo", "Sector");
     printf("\n#%-4d %-21s %-21s $%-15.2f %-2d\n",
-           arrayName[newId].id, arrayName[newId].name, arrayName[newId].lastName, arrayName[newId].salary, arrayName[newId].sector);
+           arrayName[newId - 1].id, arrayName[newId - 1].name, arrayName[newId - 1].lastName, arrayName[newId - 1].salary, arrayName[newId - 1].sector);
 }
 
 //**************************************************************************************************************************************************//
 
-/** \brief Muestra todos los campos de la estructura cargados hasta el momento
+/** \brief Muestra todos los empleados cargados hasta el momento.
  *
- * \param  sName structArray[]                                      Solicita el array de la estructura a mostrar
- * \param  int arraySize                                            Solicita el tamaño del array
+ * \param sEmployee* arrayName                                      Puntero al array de la estructura
+ * \param int newId                                                 Solicita el ID a mostrar
  *
  */
-/*
-void STR_showAllStruct(sName structArray[], int arraySize)
+
+int array_ShowAllEmployes(sEmployee* arrayName, int arraySize)
 {
-    UI_printDivider();
+    int returns = -1;
 
     int i;
 
-    printf("\n%-4s %-21s %-21s %-15s %-2s", "ID", "NOMBRE", "APELLIDO", "SUELDO", "SECTOR");
-
-    for(i=0; i < arraySize; i++)
+    if(arrayName != NULL && arraySize > 0)
     {
-        if(structArray[i].isEmpty == FULL)
+        printf("\n %-4s %-21s %-21s %-15s %-2s\n", "ID", "Nombre", "Apellido", "Sueldo", "Sector");
+        UI_printDivider();
+
+        for(i = 0; i < arraySize; i++)
         {
-            STR_showSpecifStructData(structArray[i]);
+
+            printf("\n#%-4d %-21s %-21s $%-15.2f %-2d\n",
+                    arrayName[i].id, arrayName[i].name, arrayName[i].lastName, arrayName[i].salary, arrayName[i].sector);
+
+            returns = 0;
         }
     }
+
+    return returns;
 }
-*/
 
 

@@ -14,8 +14,8 @@ int main()
     int freeIndex;
     int initResult;
     int menuChoice;
-    int previousID = 1;
-    int newID;
+    int previousId = 1;
+    int newId;
 
     initResult = array_initEmployees(arrayEmployee, EMP_SIZE);
 
@@ -36,33 +36,29 @@ int main()
         switch(menuChoice)
         {
             case 1: //*** ALTA EMPLEADOS ***//
-
                 system("cls");
                 freeIndex = array_getFreePlaceInArray(arrayEmployee, EMP_SIZE);
                 printf("freeIndex is: %d", freeIndex); // BORRAR LUEGO
 
-                if(freeIndex != 0 || freeIndex == EMP_SIZE)
+                if(freeIndex == -1 || freeIndex == EMP_SIZE)
                 {
                     UI_printDivider();
                     printf("ATENCION:\nLa base de datos de empleados se encuentra llena %d empleados cargados.\nElimine un empleado para poder ingresar uno nuevo. \n", EMP_SIZE);
                 }
                 else
                 {
-                    newID = previousID;
-                    previousID++;
-                    array_loadArrayField(arrayEmployee, EMP_SIZE, newID);
-                    array_showNewEmployeeLoaded(arrayEmployee, newID);
-                    printf("\n is empty es: %d", arrayEmployee[0].isEmpty);
+                    newId = previousId;
+                    previousId++;
+                    array_loadArrayField(arrayEmployee, EMP_SIZE, newId);
+                    array_showNewEmployeeLoaded(arrayEmployee, newId);
                 }
 
                 break;
 
             case 2: //*** MODIFICACION EMPLEADOS ***//
-
                 system("cls");
-                printf("freeIndex is: %d", freeIndex); // BORRAR LUEGO
 
-                if(freeIndex != -1)
+                if(freeIndex != -0)
                 {
                     UI_printDivider();
                     printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
@@ -72,7 +68,6 @@ int main()
                     // modify employee
                 }
 
-
                 break;
 
             case 3: //*** BAJA EMPLEADOS ***//
@@ -81,6 +76,16 @@ int main()
                 break;
             case 4: //*** MOSTRAR EMPLEADOS ***//
                 system("cls");
+
+                if(freeIndex != -0)
+                {
+                    UI_printDivider();
+                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
+                }
+                else
+                {
+                    array_ShowAllEmployes(arrayEmployee, EMP_SIZE);
+                }
 
                 break;
 
