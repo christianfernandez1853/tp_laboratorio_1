@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "DataLab.h"
 #include "InterfaceLab.h"
 #include "ArrayEmployees.h"
@@ -33,7 +34,7 @@ int array_initEmployees(sEmployee* arrayName, int arraySize)
 
 //**************************************************************************************************************************************************//
 
-/** \brief Analiza donde hay un espacio libre en la estructura y devuelve la posicion
+/** \brief Analiza donde hay un espacio libre en la estructura y devuelve la posicion.
  *
  * \param  sName arrayName[]                                     Puntero del array de la estructura
  * \param  int arraySize                                         Solicita el tamaño del array
@@ -69,10 +70,13 @@ int array_getFreePlaceInArray(sEmployee* arrayName, int arraySize)
 }
 //**************************************************************************************************************************************************//
 
-/** \brief Solicita al usuario llenar los campos de datos del array y devuelve los mismos.
+/** \brief Solicita al usuario llenar los campos de datos del array para un nuevo empleado.
  *
- * \return sEmployee* newEmployee                                   Puntero al array de la estructura
- *
+ * \param sEmployee* newEmployee                                   Puntero al array de la estructura
+ * \param arraySize                                                Tamaño del array
+ * \param newId                                                    Numero de ID del nuevo empleado
+ * \return                                                         Devuelve: -1 (Puntero NULL o arraySize invalido)
+ *                                                                            0 (Si no hay errores de parametros)
  */
 
 int array_loadArrayField(sEmployee* newEmployee, int arraySize, int newId)
@@ -126,14 +130,221 @@ void array_showNewEmployeeLoaded(sEmployee* arrayName, int newId)
 
 //**************************************************************************************************************************************************//
 
+/** \brief Busca un empleado por numero de ID.
+ *
+ * \param  sEmployee* arrayName                                      Puntero al array de la estructura
+ * \param  int arraySize                                             Solicita el tamaño del array
+ * \param  int newId                                                 Solicita el ID a mostrar
+ * \return                                                           Devuelve: -1 (Puntero NULL o arraySize invalido)
+ *                                                                             La posicion del array donde se encuentra el id
+ */
+
+int array_findEmployeeById(sEmployee* arrayName, int arraySize, int id)
+{
+    int i;
+    int returns = -1;
+
+    if(arrayName != NULL && arraySize > 0)
+    {
+        for(i = 0; i < arraySize; i++)
+        {
+            if(arrayName[i].id == id)
+            {
+                returns = i;
+                break;
+            }
+        }
+    }
+
+    return returns;
+}
+
+//**************************************************************************************************************************************************//
+
+/** \brief Solicita al usuario llenar los campos de datos del array para modificar un empleado
+ *
+ * \param sEmployee* newEmployee                                   Puntero al array de la estructura
+ * \return                                                         Devuelve: -1 (Puntero NULL o arraySize invalido)
+ *                                                                            0 (Si no hay errores de parametros)
+ */
+
+int array_modifyEmployee(sEmployee* arrayName, int arraySize, int index)
+{
+    float minSalary = 1.00;
+    float maxSalary = 1000000.00;
+    int minSector = 1;
+    int maxSector = 5;
+    int returns = -1;
+
+    if(arrayName != NULL && arraySize > 0)
+    {
+        UI_printDivider();
+        printf("                               MODIFICAR EMPLEADO: \n\n");
+        printf("                                    ID - #%d", index + 1);
+
+        data_getValidatedAlphaString(arrayName[index].name, "Ingrese Nombre: ", arraySize);
+        data_upperStringInitials(arrayName[index].name);
+        data_getValidatedAlphaString(arrayName[index].lastName, "Ingrese Apellido: ", arraySize);
+        data_upperStringInitials(arrayName[index].lastName);
+        data_getValidatedFloat(&arrayName[index].salary, "Ingrese Sueldo: ", minSalary, maxSalary);
+        data_getValidatedInt(&arrayName[index].sector, "Ingrese Sector: ", minSector, maxSector);
+
+        returns = 0;
+    }
+
+    return returns;
+}
+
+//**************************************************************************************************************************************************//
+
+/** \brief Elimina de manera logica un empleado.
+ *
+ * \param sEmployee* newEmployee                                   Puntero al array de la estructura
+ * \return                                                         Devuelve: -1 (Puntero NULL o arraySize invalido)
+ *                                                                            0 (Si no hay errores de parametros)
+ */
+
+int array_removeEmployee(sEmployee* arrayName, int arraySize, int id)
+{
+    int returns = -1;
+
+    if(arrayName != NULL && arraySize > 0)
+    {
+        arrayName[id].isEmpty = 1;
+
+        returns = 0;
+    }
+
+
+    return returns;
+}
+
+//**************************************************************************************************************************************************//
+
+int array_sortEmployees(sEmployee* arrayName, int arraySize, int order)
+{
+    int returns = -1;
+    int i;
+    int j;
+    sEmployee k;
+
+    if(arrayName != NULL && arraySize > 0)
+    {
+        if(order == 0)
+        {
+            for(i = 0; i < arraySize - 1; i++)
+            {
+                for(j = i + 1 ; j < arraySize; j++)
+                {
+                    if((strcmp(arrayName[i].lastName, arrayName[j].lastName) > 0))
+                    {
+                        strcpy(k.name, arrayName[i].name);
+                        strcpy(arrayName[i].name, arrayName[j].name);
+                        strcpy(arrayName[j].name, k.name);
+
+                        strcpy(k.lastName, arrayName[i].lastName);
+                        strcpy(arrayName[i].lastName, arrayName[j].lastName);
+                        strcpy(arrayName[j].lastName, k.lastName);
+
+                        k.salary = arrayName[i].salary;
+                        arrayName[i].salary = arrayName[j].salary;
+                        arrayName[j].salary = k.salary;
+
+                        k.id = arrayName[i].sector;
+                        arrayName[i].sector = arrayName[j].sector;
+                        arrayName[j].sector = k.sector;
+                    }
+                    else
+                    {
+                        if(strcmp(arrayName[i].lastName, arrayName[j].lastName) == 0 && (arrayName[i].sector > arrayName[j].sector))
+                        {
+                            strcpy(k.name, arrayName[i].name);
+                            strcpy(arrayName[i].name, arrayName[j].name);
+                            strcpy(arrayName[j].name, k.name);
+
+                            strcpy(k.lastName, arrayName[i].lastName);
+                            strcpy(arrayName[i].lastName, arrayName[j].lastName);
+                            strcpy(arrayName[j].lastName, k.lastName);
+
+                            k.salary = arrayName[i].salary;
+                            arrayName[i].salary = arrayName[j].salary;
+                            arrayName[j].salary = k.salary;
+
+                            k.id = arrayName[i].sector;
+                            arrayName[i].sector = arrayName[j].sector;
+                            arrayName[j].sector = k.sector;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(i = 0; i < arraySize - 1; i++)
+            {
+                for(j = i + 1 ; j < arraySize; j++)
+                {
+                    if((strcmp(arrayName[i].lastName, arrayName[j].lastName) < 0))
+                    {
+                        strcpy(k.name, arrayName[i].name);
+                        strcpy(arrayName[i].name, arrayName[j].name);
+                        strcpy(arrayName[j].name, k.name);
+
+                        strcpy(k.lastName, arrayName[i].lastName);
+                        strcpy(arrayName[i].lastName, arrayName[j].lastName);
+                        strcpy(arrayName[j].lastName, k.lastName);
+
+                        k.salary = arrayName[i].salary;
+                        arrayName[i].salary = arrayName[j].salary;
+                        arrayName[j].salary = k.salary;
+
+                        k.id = arrayName[i].sector;
+                        arrayName[i].sector = arrayName[j].sector;
+                        arrayName[j].sector = k.sector;
+                    }
+                    else
+                    {
+                        if(strcmp(arrayName[i].lastName, arrayName[j].lastName) == 0 && (arrayName[i].sector > arrayName[j].sector))
+                        {
+                            strcpy(k.name, arrayName[i].name);
+                            strcpy(arrayName[i].name, arrayName[j].name);
+                            strcpy(arrayName[j].name, k.name);
+
+                            strcpy(k.lastName, arrayName[i].lastName);
+                            strcpy(arrayName[i].lastName, arrayName[j].lastName);
+                            strcpy(arrayName[j].lastName, k.lastName);
+
+                            k.salary = arrayName[i].salary;
+                            arrayName[i].salary = arrayName[j].salary;
+                            arrayName[j].salary = k.salary;
+
+                            k.id = arrayName[i].sector;
+                            arrayName[i].sector = arrayName[j].sector;
+                            arrayName[j].sector = k.sector;
+                        }
+                    }
+                }
+            }
+        }
+
+        returns = 0;
+    }
+
+    return returns;
+}
+
+//**************************************************************************************************************************************************//
+
 /** \brief Muestra todos los empleados cargados hasta el momento.
  *
- * \param sEmployee* arrayName                                      Puntero al array de la estructura
- * \param int newId                                                 Solicita el ID a mostrar
+ * \param  sEmployee* arrayName                                      Puntero al array de la estructura
+ * \param  int arraySize                                             Solicita el tamaño del array
+ * \return                                                           Devuelve: -1 (Puntero NULL o arraySize invalido)
+ *                                                                            0 (Si no hay errores de parametros)
  *
  */
 
-int array_ShowAllEmployes(sEmployee* arrayName, int arraySize)
+int array_printEmployees(sEmployee* arrayName, int arraySize)
 {
     int returns = -1;
     int i;

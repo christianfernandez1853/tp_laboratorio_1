@@ -102,36 +102,4 @@ int UI_ExitAlert(void)
     return exitStatus;
 }
 
-/*
-    do
-    {
-        menuChoice = PrintMenu(firstNumber, secondNumber);
-
-        switch(menuChoice)
-        {
-        case 1:
-
-            break;
-
-        case 2:
-            break;
-
-        case 3:
-            break;
-
-        case 4:
-            break;
-
-        case 5:
-            exitStatus = ExitAlert();
-            break;
-
-        default:
-            system("cls");
-            PrintMessage("Opcion invalida. Ingrese una opcion correcta.");
-        }
-
-    } while (exitStatus != 1);
-*/
-
 

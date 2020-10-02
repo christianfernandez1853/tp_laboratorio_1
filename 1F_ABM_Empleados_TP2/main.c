@@ -4,17 +4,20 @@
 #include "InterfaceLab.h"
 #include "ArrayEmployees.h"
 
-#define EMP_SIZE 3
+#define EMP_SIZE 5
 
 int main()
 {
     sEmployee arrayEmployee[EMP_SIZE];
     int exitStatus;
+    int employeeIndex;
     int freeIndex;
     int initResult;
     int menuChoice;
-    int previousId = 1;
     int newId;
+    int previousId = 1;
+    int searchId;
+    int sortOrder;
 
     initResult = array_initEmployees(arrayEmployee, EMP_SIZE);
 
@@ -42,7 +45,7 @@ int main()
                 if(freeIndex == -1)
                 {
                     UI_printDivider();
-                    printf("ATENCION:\nLa base de datos de empleados se encuentra llena %d empleados cargados.\nElimine un empleado para poder ingresar uno nuevo. \n", EMP_SIZE);
+                    printf("ATENCION:\nLa base de datos de empleados se encuentra llena (%d empleados cargados).\nElimine un empleado para poder ingresar uno nuevo. \n", EMP_SIZE);
                 }
                 else
                 {
@@ -56,14 +59,27 @@ int main()
             case 2: //*** MODIFICACION EMPLEADOS ***//
                 system("cls");
 
-                if(freeIndex == 0)
+                if(previousId == 1)
                 {
                     UI_printDivider();
-                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
+                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia.\nDebes realizar el alta de un empleado primero.");
                 }
                 else
                 {
-                    // modify employee
+                    UI_printDivider();
+                    printf("Ingrese el numero de ID del empleado a modificar:  ");
+                    scanf("%d", &searchId);
+                    employeeIndex = array_findEmployeeById(arrayEmployee, EMP_SIZE, searchId);
+                    if(employeeIndex != -1)
+                    {
+                        array_modifyEmployee(arrayEmployee, EMP_SIZE, employeeIndex);
+                    }
+                    else
+                    {
+                        UI_printDivider();
+                        system("cls");
+                        printf("No se encontro el ID. ");
+                    }
                 }
 
                 break;
@@ -71,14 +87,27 @@ int main()
             case 3: //*** BAJA EMPLEADOS ***//
                 system("cls");
 
-                if(freeIndex == 0)
+                if(previousId == 1)
                 {
                     UI_printDivider();
-                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
+                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia.\nDebes realizar el alta de un empleado primero.");
                 }
                 else
                 {
-                    // modify employee
+                    UI_printDivider();
+                    printf("Ingrese el numero de ID del empleado a eliminar:  ");
+                    scanf("%d", &searchId);
+                    employeeIndex = array_findEmployeeById(arrayEmployee, EMP_SIZE, searchId);
+                    if(employeeIndex != -1)
+                    {
+                        array_removeEmployee(arrayEmployee, EMP_SIZE, employeeIndex);
+                    }
+                    else
+                    {
+                        UI_printDivider();
+                        system("cls");
+                        printf("No se encontro el ID. ");
+                    }
                 }
 
                 break;
@@ -86,14 +115,36 @@ int main()
             case 4: //*** MOSTRAR EMPLEADOS ***//
                 system("cls");
 
-                if(freeIndex == 0)
+                if(previousId == 1)
                 {
                     UI_printDivider();
-                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia. Debes realizar el alta de un empleado primero. \n");
+                    printf("NO DISPONIBLE:\nLa base de datos de empleados se encuentra vacia.\nDebes realizar el alta de un empleado primero.");
                 }
                 else
                 {
-                    array_ShowAllEmployes(arrayEmployee, EMP_SIZE);
+                    UI_printDivider();
+                    printf("                               LISTADO DE EMPLEADOS: \n");
+                    UI_printDivider();
+                    printf("Seleccione una opcion para obtener el listado ordenado por apellido y sector:\n\n");
+                    printf("[0] - Descendente\n");
+                    printf("[1] - Ascendente\n\n");
+                    scanf("%d", &sortOrder);
+                    system("cls");
+
+                    while(sortOrder != 0 && sortOrder != 1)
+                    {
+                        UI_printDivider();
+                        printf("                               LISTADO DE EMPLEADOS: \n");
+                        UI_printDivider();
+                        printf("Seleccione una opcion para obtener el listado ordenado por apellido y sector:\n\n");
+                        printf("[0] - Descendente\n");
+                        printf("[1] - Ascendente\n\n");
+                        UI_printDivider();
+                        printf("Opcion invalida. Ingrese una opcion correcta");
+                        scanf("%d", &sortOrder);
+                    }
+                        array_sortEmployees(arrayEmployee, EMP_SIZE, sortOrder);
+                        array_printEmployees(arrayEmployee, EMP_SIZE);
                 }
 
                 break;

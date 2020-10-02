@@ -1,12 +1,13 @@
 # depslib dependency file v1.0
-1601636260 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\arrayemployees.c
+1601642977 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\arrayemployees.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"DataLab.h"
 	"InterfaceLab.h"
 	"ArrayEmployees.h"
 
-1601635805 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\interfacelab.c
+1601638103 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\interfacelab.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -21,7 +22,7 @@
 
 1601353701 c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\mathlab.h
 
-1601636406 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\main.c
+1601642862 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -30,7 +31,7 @@
 
 1601612767 c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\datalab.h
 
-1601633350 c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\arrayemployees.h
+1601642590 c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\arrayemployees.h
 
 1601625624 source:c:\users\chris\desktop\utn\1° cuatrimestre\lab-prog\codeblocks\tp_laboratorio_1\1f_abm_empleados_tp2\datalab.c
 	<stdlib.h>
