@@ -394,4 +394,52 @@ int array_printEmployees(sEmployee* arrayName, int arraySize)
     return returns;
 }
 
+//**************************************************************************************************************************************************//
+
+/** \brief Calcula el total de salarios, el salario promedio y la cantidad de empleados que lo superan.
+ *
+ * \param  sEmployee* arrayName                                      Puntero al array de la estructura
+ * \param  int arraySize                                             Solicita el tamaño del array
+ * \param  float* totalSalary                                        Puntero a la variable que guarda el total de salarios
+ * \param  float* averageSalary                                      Puntero a la variable que guarda el salario promedio
+ * \param  int* superiorToAvgSalariesCounter                         Puntero a la variable que guarda la cant. de empleados que superan el salario promedio
+ * \return                                                           Devuelve: -1 (Puntero NULL o arraySize invalido)
+ *                                                                            0 (Si no hay errores de parametros)
+ *
+ */
+
+int array_totalSalaryAndAverage(sEmployee* arrayName, int arraySize, float* totalSalary, float* averageSalary, int* superiorToAvgSalariesCounter)
+{
+    int returns = -1;
+    int i;
+    int employeesCounter = 0;
+
+    if(arrayName != NULL && arraySize > 0)
+    {
+        for(i = 0; i < arraySize; i++)
+        {
+            if(arrayName[i].isEmpty == 0)
+            {
+                *totalSalary = *totalSalary + arrayName[i].salary;
+                employeesCounter++;
+            }
+        }
+
+        *averageSalary = *totalSalary / employeesCounter;
+
+        for(i = 0; i < arraySize; i++)
+        {
+            if(arrayName[i].isEmpty == 0)
+            {
+                if(arrayName[i].salary > *averageSalary)
+                {
+                    superiorToAvgSalariesCounter++;
+                }
+            }
+        }
+        returns = 0;
+    }
+
+    return returns;
+}
 

@@ -18,6 +18,9 @@ int main()
     int previousId = 1;
     int searchId;
     int sortOrder;
+    int superiorToAvgSalariesCounter = 0;
+    float averageSalary = 0;
+    float totalSalary = 0;
 
     initResult = array_initEmployees(arrayEmployee, EMP_SIZE);
 
@@ -133,6 +136,10 @@ int main()
 
                     array_sortEmployees(arrayEmployee, EMP_SIZE, sortOrder);
                     array_printEmployees(arrayEmployee, EMP_SIZE);
+                    array_totalSalaryAndAverage(arrayEmployee, EMP_SIZE, &totalSalary, &averageSalary, &superiorToAvgSalariesCounter);
+                    printf("\n\nTOTAL SUELDOS: $%.2f\n", totalSalary);
+                    printf("SUELDO PROMEDIO: $%.2f\n", averageSalary);
+                    printf("Cantidad de empleados que superan el sueldo promedio: %d", superiorToAvgSalariesCounter);
                 }
 
                 break;
