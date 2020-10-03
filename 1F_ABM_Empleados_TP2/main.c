@@ -45,7 +45,7 @@ int main()
 
                 freeIndex = array_getFreePlaceInArray(arrayEmployee, EMP_SIZE);
 
-                if(freeIndex == -1 && freeIndex == EMP_SIZE)
+                if(freeIndex == -1)
                 {
                     UI_printDivider();
                     printf("ATENCION:\nLa base de datos de empleados se encuentra llena (%d empleados cargados).\nElimine un empleado para poder ingresar uno nuevo. \n", EMP_SIZE);

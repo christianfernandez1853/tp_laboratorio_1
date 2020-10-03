@@ -189,6 +189,8 @@ int array_modifyEmployee(sEmployee* arrayName, int arraySize, int index)
         data_getValidatedFloat(&arrayName[index].salary, "Ingrese Sueldo: ", minSalary, maxSalary);
         data_getValidatedInt(&arrayName[index].sector, "Ingrese Sector: ", minSector, maxSector);
 
+        printf("El empleado ha sido modificado correctamente. \n ");
+
         returns = 0;
     }
 
@@ -210,8 +212,8 @@ int array_removeEmployee(sEmployee* arrayName, int arraySize, int id)
 
     if(arrayName != NULL && arraySize > 0)
     {
+        printf("El empleado ha sido eliminado correctamente.\n");
         arrayName[id].isEmpty = 1;
-
         returns = 0;
     }
 
