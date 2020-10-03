@@ -4,7 +4,7 @@
 #include "InterfaceLab.h"
 #include "ArrayEmployees.h"
 
-#define EMP_SIZE 5
+#define EMP_SIZE 2
 
 int main()
 {
@@ -45,7 +45,7 @@ int main()
 
                 freeIndex = array_getFreePlaceInArray(arrayEmployee, EMP_SIZE);
 
-                if(freeIndex == -1)
+                if(freeIndex == -1 && freeIndex == EMP_SIZE)
                 {
                     UI_printDivider();
                     printf("ATENCION:\nLa base de datos de empleados se encuentra llena (%d empleados cargados).\nElimine un empleado para poder ingresar uno nuevo. \n", EMP_SIZE);
@@ -136,9 +136,11 @@ int main()
 
                     array_sortEmployees(arrayEmployee, EMP_SIZE, sortOrder);
                     array_printEmployees(arrayEmployee, EMP_SIZE);
-                    array_totalSalaryAndAverage(arrayEmployee, EMP_SIZE, &totalSalary, &averageSalary, &superiorToAvgSalariesCounter);
-                    printf("\n\nTOTAL SUELDOS: $%.2f\n", totalSalary);
-                    printf("SUELDO PROMEDIO: $%.2f\n", averageSalary);
+                    array_totalSalaryAndAverage(arrayEmployee, EMP_SIZE, &totalSalary, &averageSalary);
+
+                    printf("\n\nTotal Sueldos: $%.2f\n", totalSalary);
+                    printf("Sueldo Promedio: $%.2f\n", averageSalary);
+                    superiorToAvgSalariesCounter = array_superiorToAvgSalary(arrayEmployee, EMP_SIZE, averageSalary);
                     printf("Cantidad de empleados que superan el sueldo promedio: %d", superiorToAvgSalariesCounter);
                 }
 

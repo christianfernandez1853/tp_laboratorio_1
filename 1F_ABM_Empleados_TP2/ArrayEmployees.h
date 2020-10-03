@@ -20,6 +20,7 @@ int array_modifyEmployee(sEmployee*, int, int);
 int array_removeEmployee(sEmployee*, int, int);
 int array_sortEmployees(sEmployee*, int, int);
 int array_printEmployees(sEmployee*, int);
-int array_totalSalaryAndAverage(sEmployee*, int, float*, float*, int*);
+int array_totalSalaryAndAverage(sEmployee*, int, float*, float*);
+int array_superiorToAvgSalary(sEmployee*, int, float);
 
 #endif // ARRAYEMPLOYEES_H_

@@ -235,7 +235,8 @@ int array_sortEmployees(sEmployee* arrayEmp, int arraySize, int order)
     int returns = -1;
     int i;
     int j;
-    sEmployee aux;
+    sEmployee auxLastName;
+    sEmployee auxSector;
 
     if(arrayEmp != NULL && arraySize > 0)
     {
@@ -247,49 +248,17 @@ int array_sortEmployees(sEmployee* arrayEmp, int arraySize, int order)
                 {
                     if((strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) < 0))
                     {
-                        strcpy(aux.name, arrayEmp[i].name);
-                        strcpy(arrayEmp[i].name, arrayEmp[j].name);
-                        strcpy(arrayEmp[j].name, aux.name);
-
-                        strcpy(aux.lastName, arrayEmp[i].lastName);
-                        strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
-                        strcpy(arrayEmp[j].lastName, aux.lastName);
-
-                        aux.salary = arrayEmp[i].salary;
-                        arrayEmp[i].salary = arrayEmp[j].salary;
-                        arrayEmp[j].salary = aux.salary;
-
-                        aux.sector = arrayEmp[i].sector;
-                        arrayEmp[i].sector = arrayEmp[j].sector;
-                        arrayEmp[j].sector = aux.sector;
-
-                        aux.id = arrayEmp[i].id;
-                        arrayEmp[i].id = arrayEmp[j].id;
-                        arrayEmp[j].id = aux.id;
+                        auxLastName = arrayEmp[i];
+                        arrayEmp[i] = arrayEmp[j];
+                        arrayEmp[j] = auxLastName;
                     }
                     else
                     {
                         if(strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) == 0 && (arrayEmp[i].sector < arrayEmp[j].sector))
                         {
-                            strcpy(aux.name, arrayEmp[i].name);
-                            strcpy(arrayEmp[i].name, arrayEmp[j].name);
-                            strcpy(arrayEmp[j].name, aux.name);
-
-                            strcpy(aux.lastName, arrayEmp[i].lastName);
-                            strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
-                            strcpy(arrayEmp[j].lastName, aux.lastName);
-
-                            aux.salary = arrayEmp[i].salary;
-                            arrayEmp[i].salary = arrayEmp[j].salary;
-                            arrayEmp[j].salary = aux.salary;
-
-                            aux.sector = arrayEmp[i].sector;
-                            arrayEmp[i].sector = arrayEmp[j].sector;
-                            arrayEmp[j].sector = aux.sector;
-
-                            aux.id = arrayEmp[i].id;
-                            arrayEmp[i].id = arrayEmp[j].id;
-                            arrayEmp[j].id = aux.id;
+                            auxSector = arrayEmp[i];
+                            arrayEmp[i] = arrayEmp[j];
+                            arrayEmp[j] = auxSector;
                         }
                     }
                 }
@@ -303,49 +272,17 @@ int array_sortEmployees(sEmployee* arrayEmp, int arraySize, int order)
                 {
                     if((strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) > 0))
                     {
-                        strcpy(aux.name, arrayEmp[i].name);
-                        strcpy(arrayEmp[i].name, arrayEmp[j].name);
-                        strcpy(arrayEmp[j].name, aux.name);
-
-                        strcpy(aux.lastName, arrayEmp[i].lastName);
-                        strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
-                        strcpy(arrayEmp[j].lastName, aux.lastName);
-
-                        aux.salary = arrayEmp[i].salary;
-                        arrayEmp[i].salary = arrayEmp[j].salary;
-                        arrayEmp[j].salary = aux.salary;
-
-                        aux.sector = arrayEmp[i].sector;
-                        arrayEmp[i].sector = arrayEmp[j].sector;
-                        arrayEmp[j].sector = aux.sector;
-
-                        aux.id = arrayEmp[i].id;
-                        arrayEmp[i].id = arrayEmp[j].id;
-                        arrayEmp[j].id = aux.id;
+                        auxLastName = arrayEmp[i];
+                        arrayEmp[i] = arrayEmp[j];
+                        arrayEmp[j] = auxLastName;
                     }
                     else
                     {
                         if(strcmp(arrayEmp[i].lastName, arrayEmp[j].lastName) == 0 && (arrayEmp[i].sector > arrayEmp[j].sector))
                         {
-                            strcpy(aux.name, arrayEmp[i].name);
-                            strcpy(arrayEmp[i].name, arrayEmp[j].name);
-                            strcpy(arrayEmp[j].name, aux.name);
-
-                            strcpy(aux.lastName, arrayEmp[i].lastName);
-                            strcpy(arrayEmp[i].lastName, arrayEmp[j].lastName);
-                            strcpy(arrayEmp[j].lastName, aux.lastName);
-
-                            aux.salary = arrayEmp[i].salary;
-                            arrayEmp[i].salary = arrayEmp[j].salary;
-                            arrayEmp[j].salary = aux.salary;
-
-                            aux.sector = arrayEmp[i].sector;
-                            arrayEmp[i].sector = arrayEmp[j].sector;
-                            arrayEmp[j].sector = aux.sector;
-
-                            aux.id = arrayEmp[i].id;
-                            arrayEmp[i].id = arrayEmp[j].id;
-                            arrayEmp[j].id = aux.id;
+                            auxSector = arrayEmp[i];
+                            arrayEmp[i] = arrayEmp[j];
+                            arrayEmp[j] = auxSector;
                         }
                     }
                 }
@@ -402,13 +339,12 @@ int array_printEmployees(sEmployee* arrayName, int arraySize)
  * \param  int arraySize                                             Solicita el tamaño del array
  * \param  float* totalSalary                                        Puntero a la variable que guarda el total de salarios
  * \param  float* averageSalary                                      Puntero a la variable que guarda el salario promedio
- * \param  int* superiorToAvgSalariesCounter                         Puntero a la variable que guarda la cant. de empleados que superan el salario promedio
  * \return                                                           Devuelve: -1 (Puntero NULL o arraySize invalido)
  *                                                                            0 (Si no hay errores de parametros)
  *
  */
 
-int array_totalSalaryAndAverage(sEmployee* arrayName, int arraySize, float* totalSalary, float* averageSalary, int* superiorToAvgSalariesCounter)
+int array_totalSalaryAndAverage(sEmployee* arrayName, int arraySize, float* totalSalary, float* averageSalary)
 {
     int returns = -1;
     int i;
@@ -427,19 +363,41 @@ int array_totalSalaryAndAverage(sEmployee* arrayName, int arraySize, float* tota
 
         *averageSalary = *totalSalary / employeesCounter;
 
-        for(i = 0; i < arraySize; i++)
-        {
-            if(arrayName[i].isEmpty == 0)
-            {
-                if(arrayName[i].salary > *averageSalary)
-                {
-                    superiorToAvgSalariesCounter++;
-                }
-            }
-        }
         returns = 0;
     }
 
     return returns;
 }
 
+//**************************************************************************************************************************************************//
+
+/** \brief Devuelve el contador de empleados que superan el sueldo promedio.
+ *
+ * \param  sEmployee* arrayName                                      Puntero al array de la estructura
+ * \param  int arraySize                                             Solicita el tamaño del array
+ * \param  float averageSalary                                       Solicita el sueldo promedio
+ * \return
+ *
+ */
+
+int array_superiorToAvgSalary(sEmployee* arrayName, int arraySize, float averageSalary)
+{
+    int superiorToAvgSalariesCounter = 0;
+    int i;
+
+    if(arrayName != NULL && arraySize > 0)
+    {
+        for(i = 0; i < arraySize; i++)
+        {
+            if(arrayName[i].isEmpty == 0)
+            {
+                if(arrayName[i].salary > averageSalary)
+                {
+                    superiorToAvgSalariesCounter++;
+                }
+            }
+        }
+    }
+
+    return superiorToAvgSalariesCounter;
+}
